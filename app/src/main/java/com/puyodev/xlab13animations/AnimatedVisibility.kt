@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.Dp
 
 @Composable
 fun FormularioAnimado() {
-    // Estados para almacenar los textos ingresados
     var nombre by remember { mutableStateOf("") }
     var apellido by remember { mutableStateOf("") }
     var correo by remember { mutableStateOf("") }
@@ -63,13 +62,11 @@ fun FormularioAnimado() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Campos de texto (se ocultan al enviar)
         AnimatedVisibility(visible = !isFormSubmitted) {
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // Texto de encabezado
                 Text("Coloque sus datos:", textAlign = TextAlign.Left, modifier = Modifier.fillMaxWidth())
                 Spacer(modifier = Modifier.height(8.dp))
                 TextField(
@@ -93,9 +90,7 @@ fun FormularioAnimado() {
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                // Botón "Enviar"
                 Button(onClick = {
-                    // Activa el modo enviado, el color temporal y la visibilidad del mensaje
                     isFormSubmitted = true
                     isTemporaryColor = true
                     isRegisteredVisible = true
@@ -105,12 +100,10 @@ fun FormularioAnimado() {
             }
         }
 
-        // Texto de encabezado
         Text("Animacion", textAlign = TextAlign.Left)
         Spacer(modifier = Modifier.height(8.dp))
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Mensaje de confirmación visible tras el envío
         AnimatedVisibility(
             visible = isRegisteredVisible,
             enter = fadeIn(),
@@ -127,11 +120,10 @@ fun FormularioAnimado() {
             }
         }
 
-        // Efecto para restablecer el color después de 3 segundos
         LaunchedEffect(isTemporaryColor) {
             if (isTemporaryColor) {
-                delay(3000) // Espera 3 segundos
-                isTemporaryColor = false // Vuelve el color al original automáticamente
+                delay(3000)
+                isTemporaryColor = false
             }
         }
     }
